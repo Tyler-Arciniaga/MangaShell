@@ -1,0 +1,15 @@
+[project]
+name = "MangaShell"
+version = "1.0.0"
+description = "Tired of bloated trackers? MangaShell lets you effortlessly track all your favorite anime and manga, right from the terminal."
+requires-python = ">=3.11"
+dependencies = [
+    "click>=8.1",
+]
+
+[project.scripts]
+mangashell = "mangashell:mangashell"
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"
