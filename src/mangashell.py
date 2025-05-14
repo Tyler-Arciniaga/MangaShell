@@ -7,7 +7,9 @@ import notify
 
 @click.group()
 def mangashell():
-    """Welcome to MangaShell!"""
+    """Welcome to MangaShell!
+    Tired of bloated trackers? MangaShell lets you effortlessly track all your favorite anime and manga, right from the terminal.
+    """
 
 mangashell.add_command(add.add)
 mangashell.add_command(update.update)
