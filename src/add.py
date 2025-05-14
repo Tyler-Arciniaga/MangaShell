@@ -4,7 +4,7 @@ from mongo import entries, userID
 from richConsole import console
 
 @click.command()
-@click.option("-c", "--chapter", default = None, type = int) #create chapter metadate option with default 1 (so Click infers option arguement as int)
+@click.option("-c", "--chapter", default = None, type = int)
 @click.option("-r", "--rating", default = None, type = int)
 @click.option("-s", "--status", default=None, help="completed, oon-hold, dropped, plan-to-read")
 @click.argument('entry', nargs=-1)
@@ -14,9 +14,12 @@ def add(entry: str, chapter: int, rating: int, status: str):
     entryTitle = (" ".join(entry)).title() #handle multi-word titles and clean up so that only one variation exists
     newDocument = {"userID": userID, "title": entryTitle, "chapter": chapter, "rating": rating, "status": status}
 
+    #handle incorrect status input
     if status and status.lower() not in ("completed", "on-hold", "dropped", "plan-to-read"):
         console.print("[error]status must be one of: completed, on-hold, dropped, plan-to-read")
         return 0
+    
+
     with console.status(f"Adding [emphasize]{entryTitle}[/emphasize] to your log...", spinner = 'clock'):
         time.sleep(1) #fake delay, makes the terminal look cooler don't blame me...
         duplicate = entries.find_one({"userID": userID, "title": entryTitle})
