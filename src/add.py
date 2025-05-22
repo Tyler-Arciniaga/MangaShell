@@ -6,7 +6,7 @@ from richConsole import console
 @click.command()
 @click.option("-c", "--chapter", default = None, type = int)
 @click.option("-r", "--rating", default = None, type = int)
-@click.option("-s", "--status", default=None, help="completed, oon-hold, dropped, plan-to-read")
+@click.option("-s", "--status", default=None, help="reading, completed, on-hold, dropped, plan-to-read")
 @click.argument('entry', nargs=-1)
 def add(entry: str, chapter: int, rating: int, status: str):
     """Add a new manga to your log"""
@@ -15,8 +15,8 @@ def add(entry: str, chapter: int, rating: int, status: str):
     newDocument = {"userID": userID, "title": entryTitle, "chapter": chapter, "rating": rating, "status": status}
 
     #handle incorrect status input
-    if status and status.lower() not in ("completed", "on-hold", "dropped", "plan-to-read"):
-        console.print("[error]status must be one of: completed, on-hold, dropped, plan-to-read")
+    if status and status.lower() not in ("reading", "completed", "on-hold", "dropped", "plan-to-read,"):
+        console.print("[error]status must be one of: reading, completed, on-hold, dropped, plan-to-read")
         return 0
     
 
